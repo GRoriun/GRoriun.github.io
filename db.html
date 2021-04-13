@@ -1,0 +1,241 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>OriUN DataBase Generator Query</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="without-description">
+        <h1>DataBase Query</h1>
+        <p></p>
+        <p class="view"><a href="https://github.com/GRoriun">View the File on GitHub <small>DataBase</small></a></p>
+        <ul>
+          <li class="single"><a href="https://github.com/GRoriun/oriunDocumentation/blob/main/DB%20Query/oriun_bd.sql">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        /*==============================================================*/<br>
+/* DBMS name:      MySQL 5.0                                    */<br>
+/* Created on:     7/04/2021 9:21:46 p. m.                      */<br>
+/*==============================================================*/<br><br><br>
+
+
+drop table if exists element;<br><br>
+
+drop table if exists event;<br><br>
+
+drop table if exists locationsibu;<br><br>
+
+drop table if exists location_sport;<br><br>
+
+drop table if exists location_sports_sports;<br><br>
+
+drop table if exists notifications;<br><br>
+
+drop table if exists roles;<br><br>
+
+drop table if exists sports;<br><br>
+
+drop table if exists user;<br><br>
+
+drop table if exists user_event;<br><br>
+
+drop table if exists user_sports;<br><br>
+
+/*==============================================================*/<br>
+/* Table: element                                               */<br>
+/*==============================================================*/<br>
+create table element<br>
+(<br>
+   id_element           int not null auto_increment,<br>
+   name_location        varchar(50) not null,<br>
+   name_sport           varchar(50) not null,<br>
+   description          varchar(50) not null,<br>
+   available            bool not null,<br>
+   element_name         varchar(50) not null,<br>
+   element_image        longblob not null,<br>
+   primary key (id_element)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: event                                                 */<br>
+/*==============================================================*/<br>
+create table event<br>
+(<br>
+   id_event             int not null auto_increment,<br>
+   user_name            varchar(50) not null,<br>
+   name_loc_sport       varchar(50) not null,<br>
+   name_sport           varchar(50),<br>
+   event_description    varchar(100) not null,<br>
+   event_init           date not null,<br>
+   event_end            date not null,<br>
+   capacity             numeric(8,0) not null,<br>
+   other_sport          varchar(50),<br>
+   event_init_hour      time not null,<br>
+   event_finish_hour    time not null,<br>
+   event_title          varchar(50) not null,<br>
+   primary key (id_event)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: locationsibu                                          */<br>
+/*==============================================================*/<br>
+create table locationsibu<br>
+(<br>
+   name_location        varchar(50) not null,<br>
+   open                 bool not null,<br>
+   image_location       longblob not null,<br>
+   primary key (name_location)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: location_sport                                        */<br>
+/*==============================================================*/<br>
+create table location_sport<br>
+(<br>
+   name_loc_sport       varchar(50) not null,<br>
+   primary key (name_loc_sport)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: location_sports_sports                                */<br>
+/*==============================================================*/<br>
+create table location_sports_sports<br>
+(<br>
+   name_loc_sport       varchar(50) not null,<br>
+   name_sport           varchar(50) not null,<br>
+   primary key (name_loc_sport, name_sport)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: notifications                                         */<br>
+/*==============================================================*/<br>
+create table notifications<br>
+(<br>
+   id_notification      int not null auto_increment,<br>
+   user_name            varchar(50) not null,<br>
+   name_sport           varchar(50) not null,<br>
+   id_event             int not null,<br>
+   motification_date    date not null,<br>
+   time_notification    time not null,<br>
+   expiration_time      time not null,<br>
+   notifiaction_description varchar(80) not null,<br>
+   primary key (id_notification)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: roles                                                 */<br>
+/*==============================================================*/<br>
+create table roles<br>
+(<br>
+   rol_name             varchar(50) not null,<br>
+   primary key (rol_name)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: sports                                                */<br>
+/*==============================================================*/<br>
+create table sports<br>
+(<br>
+   name_sport           varchar(50) not null,<br>
+   primary key (name_sport)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: user                                                  */<br>
+/*==============================================================*/<br>
+create table user<br>
+(<br>
+   user_name            varchar(50) not null,<br>
+   rol_name             varchar(50) not null,<br>
+   password             varchar(50) not null,<br>
+   primary key (user_name)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: user_event                                            */<br>
+/*==============================================================*/<br>
+create table user_event<br>
+(<br>
+   user_name            varchar(50) not null,<br>
+   id_event             int not null,<br>
+   primary key (user_name, id_event)<br>
+);<br>
+<br>
+/*==============================================================*/<br>
+/* Table: user_sports                                           */<br>
+/*==============================================================*/<br>
+create table user_sports<br>
+(<br>
+   user_name            varchar(50) not null,<br>
+   name_sport           varchar(50) not null,<br>
+   primary key (user_name, name_sport)<br>
+);<br>
+<br>
+alter table element add constraint fk_element_lacation foreign key (name_location)<br>
+      references locationsibu (name_location) on delete restrict on update restrict;<br>
+<br>
+alter table element add constraint fk_element_sports foreign key (name_sport)<br>
+      references sports (name_sport) on delete restrict on update restrict;<br>
+<br>
+alter table event add constraint fk_create_event foreign key (user_name)<br>
+      references user (user_name) on delete restrict on update restrict;<br>
+<br>
+alter table event add constraint fk_event_sports foreign key (name_sport)<br>
+      references sports (name_sport) on delete restrict on update restrict;<br>
+<br>
+alter table event add constraint fk_location_sport_event foreign key (name_loc_sport)<br>
+      references location_sport (name_loc_sport) on delete restrict on update restrict;<br>
+<br>
+alter table location_sports_sports add constraint fk_location_sports_sports foreign key (name_loc_sport)<br>
+      references location_sport (name_loc_sport) on delete restrict on update restrict;<br>
+<br>
+alter table location_sports_sports add constraint fk_location_sports_sports2 foreign key (name_sport)<br>
+      references sports (name_sport) on delete restrict on update restrict;<br>
+<br>
+alter table notifications add constraint fk_event_notification foreign key (id_event)<br>
+      references event (id_event) on delete restrict on update restrict;<br>
+<br>
+alter table notifications add constraint fk_sports_notification foreign key (name_sport)<br>
+      references sports (name_sport) on delete restrict on update restrict;<br>
+<br>
+alter table notifications add constraint fk_user_notification foreign key (user_name)<br>
+      references user (user_name) on delete restrict on update restrict;<br>
+<br>
+alter table user add constraint fk_user_roles foreign key (rol_name)<br>
+      references roles (rol_name) on delete restrict on update restrict;<br>
+<br>
+alter table user_event add constraint fk_user_event foreign key (user_name)<br>
+      references user (user_name) on delete restrict on update restrict;<br>
+<br>
+alter table user_event add constraint fk_user_event2 foreign key (id_event)<br>
+      references event (id_event) on delete restrict on update restrict;<br>
+<br>
+alter table user_sports add constraint fk_user_sports foreign key (user_name)<br>
+      references user (user_name) on delete restrict on update restrict;<br>
+<br>
+alter table user_sports add constraint fk_user_sports2 foreign key (name_sport)<br>
+      references sports (name_sport) on delete restrict on update restrict;<br>
+      </section>
+      <ul>
+          <li class="single"><a href="https://groriun.github.io/">Go <strong>Back</strong></a></li>
+        </ul>
+    </div>
+    <footer>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
